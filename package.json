@@ -18,6 +18,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
+    "fastify": "^4.3.0",
     "validator-0.6": "npm:@api3/airnode-validator@0.6.5",
     "validator-0.7": "npm:@api3/airnode-validator@0.7.2"
   },
