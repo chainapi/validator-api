@@ -1,0 +1,6 @@
+.github/
+.husky/
+node_modules/
+.env.example
+README
+

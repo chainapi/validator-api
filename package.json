@@ -1,10 +1,15 @@
 {
   "name": "validator-api",
-  "version": "1.0.0",
-  "description": "Validate Airnode config files over HTTP",
-  "main": "index.js",
   "author": "ChainAPI <https://chainapi.com>",
   "license": "MIT",
+  "version": "1.0.0",
+  "description": "Validate Airnode config files over HTTP",
+  "private": false,
+  "main": "dist/src/index",
+  "types": "dist/src/index",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "yarn clean && yarn tsc",
     "clean": "rimraf -rf ./dist",
