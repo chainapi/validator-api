@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // Project options
+    "declaration": true,
+    "downlevelIteration": true,
+    "lib": ["es2015"],
+    "outDir": "./dist",
+    "removeComments": true,
+    "target": "ESNext",
+
+    // Module Resolution
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+
+    // Source maps
+    "sourceMap": true,
+
+    // Strict checks
+    "allowUnreachableCode": false,
+    "strict": true,
+
+    // Linter Checks
+    "noUncheckedIndexedAccess": true, // accessing index must always check for undefined
+    "noUnusedLocals": true, // Report errors on unused local variables.
+    "noUnusedParameters": true // Report errors on unused parameters in functions
+  },
+  "exclude": ["node_modules", "dist"]
+}
