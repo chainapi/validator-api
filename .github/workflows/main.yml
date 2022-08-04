@@ -1,0 +1,40 @@
+name: Continuous Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    name: Check Markdown links
+    steps:
+      - name: Clone eslint-formatter-teamcity
+        uses: actions/checkout@master
+      - name: Check hyperlinks
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+
+  lint-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    name: Build (${{ matrix.node-version }})
+    steps:
+      - name: Clone validator-api
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile --silent
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test
+
