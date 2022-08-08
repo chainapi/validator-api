@@ -1,0 +1,277 @@
+{
+  "apiCredentials": [
+    {
+      "oisTitle": "Validator API fixture",
+      "securitySchemeName": "ValidatorAPIfixtureSecurityScheme1ApiKey",
+      "securitySchemeValue": "${VALIDATOR_API_FIXTURE_SECURITY_SCHEME_1_APIKEY_BASIC_VALUE}"
+    }
+  ],
+  "chains": [
+    {
+      "authorizers": ["0xf18c105D0375E80980e4EED829a4A68A539E6178"],
+      "blockHistoryLimit": 300,
+      "contracts": {
+        "AirnodeRrp": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd"
+      },
+      "id": "1",
+      "maxConcurrency": 50,
+      "minConfirmations": 0,
+      "options": {
+        "baseFeeMultiplier": 2,
+        "fulfillmentGasLimit": 500000,
+        "priorityFee": {
+          "unit": "gwei",
+          "value": 3.12
+        },
+        "txType": "eip1559",
+        "withdrawalRemainder": {
+          "unit": "wei",
+          "value": 0
+        }
+      },
+      "providers": {
+        "mainnet1": {
+          "url": "https://example.com/providers/mainnet/1"
+        },
+        "mainnet2": {
+          "url": "https://example.com/providers/mainnet/2"
+        }
+      },
+      "type": "evm"
+    },
+    {
+      "authorizers": ["0xf18c105D0375E80980e4EED829a4A68A539E6178"],
+      "blockHistoryLimit": 300,
+      "contracts": {
+        "AirnodeRrp": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd"
+      },
+      "id": "5",
+      "maxConcurrency": 50,
+      "minConfirmations": 0,
+      "options": {
+        "baseFeeMultiplier": 2,
+        "fulfillmentGasLimit": 500000,
+        "priorityFee": {
+          "unit": "gwei",
+          "value": 3.12
+        },
+        "txType": "eip1559",
+        "withdrawalRemainder": {
+          "unit": "wei",
+          "value": 0
+        }
+      },
+      "providers": {
+        "goerli1": {
+          "url": "https://example.com/providers/goerli/1"
+        }
+      },
+      "type": "evm"
+    }
+  ],
+  "nodeSettings": {
+    "airnodeWalletMnemonic": "${AIRNODE_WALLET_MNEMONIC}",
+    "cloudProvider": {
+      "disableConcurrencyReservations": true,
+      "region": "us-east-2",
+      "type": "aws"
+    },
+    "heartbeat": {
+      "apiKey": "292c87fb-1497-4080-be0f-0e659184ef1e",
+      "enabled": true,
+      "id": "${HEARTBEAT_ID}",
+      "url": "${HEARTBEAT_URL}"
+    },
+    "httpGateway": {
+      "apiKey": "${HTTP_GATEWAY_API_KEY_BETWEEN_30_TO_120_CHARACTERS}",
+      "enabled": true,
+      "maxConcurrency": 20
+    },
+    "httpSignedDataGateway": {
+      "apiKey": "${HTTP_SIGNED_DATA_GATEWAY_API_KEY}",
+      "enabled": true,
+      "maxConcurrency": 20
+    },
+    "logFormat": "plain",
+    "logLevel": "INFO",
+    "nodeVersion": "0.7.2",
+    "stage": "salmon-manatee"
+  },
+  "ois": [
+    {
+      "apiSpecifications": {
+        "components": {
+          "securitySchemes": {
+            "ValidatorAPIfixtureSecurityScheme1ApiKey": {
+              "in": "query",
+              "name": "my-secret-api-key",
+              "type": "apiKey"
+            }
+          }
+        },
+        "paths": {
+          "/get": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "user-defined"
+                },
+                {
+                  "in": "header",
+                  "name": "fixed"
+                }
+              ]
+            }
+          },
+          "/post": {
+            "post": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "user-defined"
+                },
+                {
+                  "in": "cookie",
+                  "name": "fixed"
+                }
+              ]
+            }
+          }
+        },
+        "security": {
+          "ValidatorAPIfixtureSecurityScheme1ApiKey": []
+        },
+        "servers": [
+          {
+            "url": "https://api3.org"
+          }
+        ]
+      },
+      "endpoints": [
+        {
+          "description": "This endpoint can be used for testing GET requests",
+          "externalDocs": "https://docs.api3.rg",
+          "fixedOperationParameters": [
+            {
+              "operationParameter": {
+                "in": "header",
+                "name": "fixed"
+              },
+              "value": "1234"
+            }
+          ],
+          "name": "GET_/get",
+          "operation": {
+            "method": "get",
+            "path": "/get"
+          },
+          "parameters": [
+            {
+              "default": "hello-world",
+              "name": "user-defined",
+              "operationParameter": {
+                "in": "query",
+                "name": "user-defined"
+              }
+            }
+          ],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ],
+          "summary": "A simple GET endpoint"
+        },
+        {
+          "description": "This endpoint can be used for testing POST requests",
+          "externalDocs": "https://docs.api3.org",
+          "fixedOperationParameters": [
+            {
+              "operationParameter": {
+                "in": "cookie",
+                "name": "fixed"
+              },
+              "value": "9876"
+            }
+          ],
+          "name": "POST_/post",
+          "operation": {
+            "method": "post",
+            "path": "/post"
+          },
+          "parameters": [
+            {
+              "default": "hello-world",
+              "name": "user-defined",
+              "operationParameter": {
+                "in": "query",
+                "name": "user-defined"
+              }
+            }
+          ],
+          "reservedParameters": [
+            {
+              "name": "_times"
+            },
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            }
+          ],
+          "summary": "A simple POST endpoint"
+        }
+      ],
+      "oisFormat": "1.0.0",
+      "title": "Validator API fixture",
+      "version": "0.1.0"
+    }
+  ],
+  "templates": [],
+  "triggers": {
+    "http": [
+      {
+        "endpointId": "0xdb0294f4aeb7c5f7943680477bf79ae399bd18bbb6d3682e6bef08a97ea33257",
+        "endpointName": "GET_/get",
+        "oisTitle": "Validator API fixture"
+      },
+      {
+        "endpointId": "0xd8924cb3c545201edfca164f7bda30149f66a80aed38449f34a1bb1d54f0f426",
+        "endpointName": "POST_/post",
+        "oisTitle": "Validator API fixture"
+      }
+    ],
+    "httpSignedData": [
+      {
+        "endpointId": "0xdb0294f4aeb7c5f7943680477bf79ae399bd18bbb6d3682e6bef08a97ea33257",
+        "endpointName": "GET_/get",
+        "oisTitle": "Validator API fixture"
+      },
+      {
+        "endpointId": "0xd8924cb3c545201edfca164f7bda30149f66a80aed38449f34a1bb1d54f0f426",
+        "endpointName": "POST_/post",
+        "oisTitle": "Validator API fixture"
+      }
+    ],
+    "rrp": [
+      {
+        "endpointId": "0xdb0294f4aeb7c5f7943680477bf79ae399bd18bbb6d3682e6bef08a97ea33257",
+        "endpointName": "GET_/get",
+        "oisTitle": "Validator API fixture"
+      },
+      {
+        "endpointId": "0xd8924cb3c545201edfca164f7bda30149f66a80aed38449f34a1bb1d54f0f426",
+        "endpointName": "POST_/post",
+        "oisTitle": "Validator API fixture"
+      }
+    ]
+  }
+}

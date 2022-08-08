@@ -1,6 +1,6 @@
 import { match } from 'ts-pattern';
-import validator06 from 'validator-0.6';
-import validator07 from 'validator-0.7';
+import * as validator07 from 'validator-0.7';
+import { SUPPORTED_VERSIONS } from './constants';
 import { parseSemver } from './utils';
 
 export const validate = (semverStr: string, config: any) => {
@@ -8,20 +8,23 @@ export const validate = (semverStr: string, config: any) => {
 
   const result = validate(config);
   if (!result.success) {
-    console.log('TODO: Validation failed');
-    // TODO: handle and return errors;
-    return { success: false, errors: [] };
+    return { valid: false, errors: (result.error as any).issues };
   }
-  return { success: true, errors: [] };
+  return { valid: true, errors: [] };
 };
 
-export const getVersionValidator = (semverStr: string) => {
+const getVersionValidator = (semverStr: string) => {
   const semver = parseSemver(semverStr);
 
+  // Reconstruct with just the major and minor versions to check supported versions
+  const majorMinor = `${semver.major}.${semver.minor}`;
+  if (!SUPPORTED_VERSIONS.includes(majorMinor)) {
+    throw new Error(`Unsupported version:${semverStr}`);
+  }
+
   return match(semver)
-    .with({ major: 0, minor: 6 }, () => validator06.parseConfig)
     .with({ major: 0, minor: 7 }, () => validator07.parseConfig)
     .otherwise(() => {
-      throw new Error('Unsupported version');
+      throw new Error(`Unsupported version:${semverStr}`);
     });
 };
