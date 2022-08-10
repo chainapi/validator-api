@@ -41,7 +41,7 @@ npm run start
 
 # Option 3: Docker
 docker build -t validator-api:latest .
-docker run
+docker run -it --rm --name validator-api validator-api
 ```
 
 This will start an HTTP server on the port defined by the environment variable `PORT` (default: `8000`). This can be configured locally by adding a `.env` file to the project root (see `.env.example`).
