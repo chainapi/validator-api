@@ -9,6 +9,7 @@
     - [2. Validate](#2-validate)
   - [Adding a new Airnode validator version](#adding-a-new-airnode-validator-version)
   - [Testing](#testing)
+  - [Releasing](#releasing)
 
 ## Requirements
 
@@ -126,4 +127,14 @@ npm run test:watch
 
 # Runs all tests and outputs the coverage metrics to /coverage
 npm run test:coverage
+```
+
+## Releasing
+
+```sh
+npm publish
+
+docker build -t validator-api:latest .
+docker tag [image-id] andreogle/chainapi-validator-api:[version]
+docker push andreogle/chainapi-validator-api:[version]
 ```
