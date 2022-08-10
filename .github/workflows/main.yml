@@ -31,6 +31,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Upgrade NPM
+        run: npm install -g npm
       - name: Install Dependencies
         run: npm ci
       - name: Lint
