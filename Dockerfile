@@ -5,8 +5,13 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn install --frozen-lockfile
+RUN npm ci
+
+ENV PORT=8000
+ENV NODE_ENV=production
+
+RUN npm run build
 
 EXPOSE 8000
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]
 

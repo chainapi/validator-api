@@ -1,6 +1,10 @@
+import { readdirSync } from 'fs';
 import request from 'supertest';
-import { SUPPORTED_VERSIONS } from './constants';
 import { build } from './app';
+
+const SUPPORTED_VERSIONS = readdirSync('./test/fixtures', { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
 
 describe('GET /', () => {
   it('returns the healthy status check', async () => {

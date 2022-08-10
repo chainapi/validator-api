@@ -1,21 +1,27 @@
+import { readdirSync } from 'fs';
 import * as validation from './validation';
-import { SUPPORTED_VERSIONS } from './constants';
 
-describe.each(SUPPORTED_VERSIONS)('validates v%s configs', (version) => {
+const SUPPORTED_VERSIONS = readdirSync('./test/fixtures', { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
+
+describe.each(SUPPORTED_VERSIONS)('validate v% configs', (version) => {
   const config = require(`../test/fixtures/${version}/config.json`);
 
   it('validates a valid config', () => {
-    expect(validation.validate(version, config)).toEqual({ valid: true, errors: [] });
+    expect(validation.validate(config)).toEqual({ valid: true, errors: [] });
   });
 
   it('throws an error if the version is not supported', () => {
-    expect(() => validation.validate('0.6', config)).toThrowError('Unsupported version:0.6');
+    const invalid = JSON.parse(JSON.stringify(config));
+    invalid.nodeSettings.nodeVersion = '0.6.5';
+    expect(() => validation.validate(invalid)).toThrowError('Unsupported version: v0.6.5');
   });
 
   it('validates an invalid config', () => {
     const invalid = JSON.parse(JSON.stringify(config));
     delete invalid.ois;
-    expect(validation.validate(version, invalid)).toEqual({
+    expect(validation.validate(invalid)).toEqual({
       valid: false,
       errors: [
         {
@@ -27,5 +33,14 @@ describe.each(SUPPORTED_VERSIONS)('validates v%s configs', (version) => {
         },
       ],
     });
+  });
+});
+
+describe('extractVersionFromConfig', () => {
+  const config = require(`../test/fixtures/0.7/config.json`);
+
+  it('extracts and parses the version from the config', () => {
+    const res = validation.extractVersionFromConfig(config);
+    expect(res).toEqual({ major: 0, minor: 7, patch: 2 });
   });
 });

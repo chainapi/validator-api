@@ -1,5 +1,5 @@
 {
-  "name": "validator-api",
+  "name": "@chainapi/validator-api",
   "author": "ChainAPI <https://chainapi.com>",
   "license": "MIT",
   "version": "1.0.0",
@@ -11,18 +11,18 @@
     "dist"
   ],
   "scripts": {
-    "build": "yarn clean && yarn tsc",
+    "build": "npm run clean && tsc",
     "clean": "rimraf -rf ./coverage ./dist",
     "dev": "nodemon --ext '*' --watch src --exec 'ts-node src/server.ts'",
-    "lint": "yarn lint:eslint",
+    "lint": "npm run lint:eslint",
     "lint:eslint": "eslint . --ext .js,.ts",
-    "postinstall": "husky install && yarn clean",
+    "postinstall": "husky install && npm run clean",
     "prettify": "prettier --write ./**/*.{js,ts,json,md}",
     "pretty-quick": "pretty-quick --staged --pattern \"**/*.*(js|ts|json|md)\"",
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "test": "jest",
-    "test:coverage": "yarn test --coverage",
-    "test:watch": "yarn test --watch"
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "dotenv": "^16.0.1",

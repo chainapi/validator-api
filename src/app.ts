@@ -10,9 +10,9 @@ export const build = (): Express => {
   });
 
   app.post('/validate', (req: Request, res: Response) => {
-    const { config, version } = req.body;
+    const { config } = req.body;
     try {
-      const { valid, errors } = validate(version, config);
+      const { valid, errors } = validate(config);
       const status = valid ? 200 : 422;
       res.type('application/json').status(status).send({ valid, errors });
     } catch (e) {
