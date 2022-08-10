@@ -135,6 +135,10 @@ npm run test:coverage
 npm publish
 
 docker build -t validator-api:latest .
+
+docker tag [image-id] andreogle/chainapi-validator-api:latest
+docker push andreogle/chainapi-validator-api:latest
+
 docker tag [image-id] andreogle/chainapi-validator-api:[version]
 docker push andreogle/chainapi-validator-api:[version]
 ```
