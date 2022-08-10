@@ -52,22 +52,24 @@ Once the server is running the following endpoints are exposed:
 
 ### 1. Healthcheck
 
-`GET /`
+Accessible at: `GET /`
 
 This endpoint returns a static JSON object indicating that the server is running.
 
 Example:
 
 ```sh
-curl 'http://localhost:8000/
+curl 'http://localhost:8000/'
 # { "status": "alive" }
 ```
 
 ### 2. Validate
 
-`POST /validate`
+Accessible at: `POST /validate`
 
-This endpoint accepts a single parameter:
+This endpoint accepts a single parameter (`config`) and returns a JSON object that indicates if the config is valid or not, as well as the specific errors returned by the `airnode-validator` package.
+
+Parameters:
 
 1. `config` - the full Airnode config (usually defined in a config.json file)
 
@@ -77,7 +79,7 @@ Example:
 curl --request POST 'localhost:8000/validate' \
   --header 'Content-Type: application/json' \
   --data-raw '{ "config": { ... } }'
-# { value: false, errors: [...] }
+# { valid: false, errors: [...] }
 ```
 
 ## Adding a new Airnode validator version
