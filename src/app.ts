@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import { validate } from './validation';
 
-export const build = () => {
+export const build = (): Express => {
   const app: Express = express();
   app.use(express.json());
 

@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "yarn clean && yarn tsc",
-    "clean": "rimraf -rf ./dist",
+    "clean": "rimraf -rf ./coverage ./dist",
     "dev": "nodemon --ext '*' --watch src --exec 'ts-node src/server.ts'",
     "lint": "yarn lint:eslint",
     "lint:eslint": "eslint . --ext .js,.ts",
@@ -21,13 +21,12 @@
     "pretty-quick": "pretty-quick --staged --pattern \"**/*.*(js|ts|json|md)\"",
     "start": "node dist/src/server.js",
     "test": "jest",
+    "test:coverage": "yarn test --coverage",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "fastify": "^4.3.0",
-    "fastify-plugin": "^4.1.0",
     "pino": "^8.4.0",
     "pino-http": "^8.2.0",
     "ts-pattern": "^4.0.5",

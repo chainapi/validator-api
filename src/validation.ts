@@ -22,6 +22,8 @@ const getVersionValidator = (semverStr: string) => {
     throw new Error(`Unsupported version:${semverStr}`);
   }
 
+  // TODO: investigate how/if this can be better done with types alone
+  // and dynamic pattern matching
   return match(semver)
     .with({ major: 0, minor: 7 }, () => validator07.parseConfig)
     .otherwise(() => {
