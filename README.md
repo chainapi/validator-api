@@ -40,9 +40,12 @@ npm run dev
 npm run build
 npm run start
 
-# Option 3: Docker
+# Option 3: Build and run with Docker locally
 docker build -t validator-api:latest .
 docker run -it --rm --name validator-api validator-api
+
+# Option 4: Pull and run the Docker hub image
+docker run -it --rm --name validator-api andreogle/chainapi-validator-api:latest
 ```
 
 This will start an HTTP server on the port defined by the environment variable `PORT` (default: `8000`). This can be configured locally by adding a `.env` file to the project root (see `.env.example`).
