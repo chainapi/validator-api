@@ -7,8 +7,8 @@ describe('parseSemver', () => {
   });
 
   it('throws an error when the version is not 3 numbers', () => {
-    expect(() => strings.parseSemver('1')).toThrowError('Invalid version: 1');
-    expect(() => strings.parseSemver('1.2')).toThrowError('Invalid version: 1.2');
-    expect(() => strings.parseSemver('1.2.3.4')).toThrowError('Invalid version: 1.2.3.4');
+    expect(() => strings.parseSemver('1')).toThrow('Invalid version: 1');
+    expect(() => strings.parseSemver('1.2')).toThrow('Invalid version: 1.2');
+    expect(() => strings.parseSemver('1.2.3.4')).toThrow('Invalid version: 1.2.3.4');
   });
 });

@@ -15,7 +15,7 @@ describe.each(SUPPORTED_VERSIONS)('validate v% configs', (version) => {
   it('throws an error if the version is not supported', () => {
     const invalid = JSON.parse(JSON.stringify(config));
     invalid.nodeSettings.nodeVersion = '0.6.5';
-    expect(() => validation.validate(invalid)).toThrowError('Unsupported version: v0.6.5');
+    expect(() => validation.validate(invalid)).toThrow('Unsupported version: v0.6.5');
   });
 
   it('validates an invalid config', () => {
